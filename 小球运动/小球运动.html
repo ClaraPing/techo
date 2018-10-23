@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>小球运动</title>
+    <style type="text/css" media="screen">
+        button{
+            position: fixed;
+            top: 30px;
+            left: 20%;
+        }
+        .earth{
+            position: relative;
+            left: 50%;
+            margin-left: -125px;
+            top: 50%;
+            margin-top: 190px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom,royalblue,lightblue,skyblue);
+        }
+        .star{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            left: -120px;
+            top: 0;
+            border-radius: 50%;
+            background: radial-gradient(darkred,red);
+        }
+    </style>
+    <script src="../js/jquery.1.11.3.min.js"></script>
+</head>
+<body>
+    <button>停止运动</button>
+    <div class="earth">
+        <div class="star"></div>
+    </div>
+    <script>
+        
+        
+        var r = 200; // 半径
+        var angle = 0; // 角度
+
+
+        // 小球运动函数
+        function move(){
+            // 移动点的相对于原点的X轴的位置
+            var x = r*Math.cos(angle*Math.PI/180) + 95;
+            // 移动点的相对于原点的Y轴的位置
+            var y = r*Math.sin(angle*Math.PI/180) + 95;
+
+            $('.star').css({
+                left: x + 'px',
+                top: y + 'px'
+            })
+            angle++;
+        }
+
+        var timer = setInterval("move()",10);
+
+        $('button').click(function() {
+            if($(this).hasClass('has')){
+                timer = setInterval("move()",10); //开启定时器
+
+                $(this).removeClass('has');
+                $(this).val("停止运动");
+
+            }else{
+                clearInterval(timer); //清除定时器
+
+                $(this).addClass('has');
+                $(this).val("开始运动")
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成验证码</title>
+    <script src="../js/jquery.1.11.3.min.js"></script>
+	<style>  
+        .yz{
+            width: 60%;
+            height: 50px;
+            line-height: 50px;
+            margin: 100px auto;
+        }
+        .yz_code{
+            float: left;
+            width: 140px;
+            text-align: center;
+            height: 100%;
+            border: 1px solid #000;
+            margin-right: 20px;
+        }
+        button{
+            margin-top: 24px;
+            font-size: 16px;
+            border: none;
+            background: transparent;
+            border-bottom: 1px solid blue;
+        }
+	</style>
+</head>
+<body>
+	<div class="yz">
+        <div class="yz_code">
+            
+        </div>
+        <button class="btn" type="btn">换一张</button>
+    </div>
+
+    <script>
+
+        // 生成两个数之间的随机数
+        function rnd(start,end){
+            return Math.floor(Math.random()*(end-start+1))+start;
+        }
+
+        var str ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        // 生成6位数字验证码
+        function code(){
+            var arr = [];
+            for(var i = 0;i<6;i++){
+                arr[i] = str.charAt(rnd(0,str.length-1));
+            }
+            // 将数组转化为字符串
+            var res = arr.join("")
+            $('.yz_code').html(res);
+        }
+
+    /*
+        // 生成验证码的第二种方法
+        var arr = [];
+        var len = 6;
+        
+        for(var i = 0; i < len; i++){
+
+            // rnd是通过util.js引入
+            var num = rnd(48,122); // 58
+
+            if ((num>=48&&num<=57)||(num>=65&&num<=90)||(num>=97&&num<=122)){
+                arr[i] = String.fromCharCode(num);
+            }else{
+                // 如果不是有效ascii码，则增加一次循环
+                len++;
+            }
+        }
+
+        console.log(arr.join(""));
+    */
+
+
+        // 首次进入时展示的验证码
+        code();
+
+        $('.btn').click(function(event) {
+            code();
+        });
+
+
+
+        
+        
+    </script>
+</body>
+</html>
