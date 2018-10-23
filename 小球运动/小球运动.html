@@ -65,13 +65,13 @@
                 timer = setInterval("move()",10); //开启定时器
 
                 $(this).removeClass('has');
-                $(this).val("停止运动");
+                $(this).html("停止运动");
 
             }else{
                 clearInterval(timer); //清除定时器
 
                 $(this).addClass('has');
-                $(this).val("开始运动")
+                $(this).html("开始运动")
             }
         });
     </script>
